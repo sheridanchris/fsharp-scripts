@@ -8,6 +8,10 @@ let words (str: string) =
   |> Seq.map (fun m -> m.Value)
   |> Seq.toList
 
+let takeSafe n list =
+  let n = Math.Min(n, List.length list)
+  List.take n list
+
 let frequencies words =
   words
   |> List.map lower
@@ -17,7 +21,7 @@ let mostUsedWords n words =
   words
   |> frequencies
   |> List.sortByDescending snd
-  |> List.take n
+  |> takeSafe n
 
 let mostUsedWordsByLength n words =
   mostUsedWords n words
